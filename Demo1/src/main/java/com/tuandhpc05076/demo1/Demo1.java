@@ -17,4 +17,7 @@ public class Demo1 {
         System.out.println("Hello World!");
     }
     //trrtert
+    public String name(String name){
+        return name;
+    }
 }
