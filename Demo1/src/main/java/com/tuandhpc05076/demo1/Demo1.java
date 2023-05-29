@@ -10,7 +10,7 @@ package com.tuandhpc05076.demo1;
  * @author DELL E5470
  */
 public class Demo1 {
-
+    //chú thích
     public static void main(String[] args) {
         System.out.println("Hello World!");
     }
