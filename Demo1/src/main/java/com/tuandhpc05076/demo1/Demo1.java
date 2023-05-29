@@ -12,9 +12,11 @@ package com.tuandhpc05076.demo1;
 public class Demo1 {
 
 
-    //tôi tên là đặng hoàng tuấn
+    //chú thích
+   
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
     }
+    //trrtert
 }
