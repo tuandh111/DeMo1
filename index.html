@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typewriter Effect</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script type="text/javascript" src="./js/jquery.min.js"></script>
+  <script type="text/javascript" src="./js/jscex.min.js"></script>
+  <script type="text/javascript" src="./js/jscex-parser.js"></script>
+  <script type="text/javascript" src="./js/jscex-jit.js"></script>
+  <script type="text/javascript" src="./js/jscex-builderbase.min.js"></script>
+  <script type="text/javascript" src="./js/jscex-async.min.js"></script>
+  <script type="text/javascript" src="./js/jscex-async-powerpack.min.js"></script>
+  <script type="text/javascript" src="./js/functions.js" charset="utf-8"></script>
+  <script type="text/javascript" src="./js/love.js" charset="utf-8"></script>
+</head>
+<style>
+  .typewriter {
+    text-align: center;
+  }
+
+  #text {
+    color: rgb(35, 230, 83);
+    margin-top: 70px;
+    font-size: 60px;
+    font-weight: bold;
+    border-right: 2px solid #333;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 5s steps(40) forwards;
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+
+    to {
+      width: 100%;
+    }
+  }
+
+  .container {
+    position: relative;
+    width: 200px;
+    /* Chiều rộng của khung chứa hình ảnh */
+    height: 200px;
+    /* Chiều cao của khung chứa hình ảnh */
+  }
+
+  .rotating-image {
+    border-radius: 100%;
+    position: absolute;
+    top: 34px;
+    left: 0;
+    width: 100px;
+    /* Chiều rộng của hình ảnh */
+    height: 100px;
+    /* Chiều cao của hình ảnh */
+    transform: translate(-50%, -50%);
+    animation: rotateImage 4s linear infinite;
+    /* Tên animation, thời gian, chế độ, lặp vô hạn */
+  }
+
+  .page__main {
+    background-image: url(https://a-static.besthdwallpaper.com/red-heart-tree-in-a-red-flower-field-wallpaper-3840x2400-43691_9.jpg);
+    height: 100vh;
+    background-size: cover;
+    /* Hiển thị ảnh sao cho nó bao phủ hoàn toàn phần tử chứa */
+    background-position: center;
+  }
+
+  @keyframes rotateImage {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+      /* Góc quay ban đầu là 0 độ */
+    }
+
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+      /* Góc quay cuối cùng là 360 độ (hoàn thành một vòng) */
+    }
+  }
+</style>
+
+<body class="page__main">
+  <div class="typewriter">
+    <div class="buttons" style="height: 80px;">
+      <!-- Chữ ở menu bạn có thể sửa lại theo ý của bạn -->
+      <div class="container" style="float: right; margin-top: 10px;">
+        <img
+          src="https://png.pngtree.com/png-clipart/20230105/original/pngtree-glossy-red-heart-with-white-outline-png-image_8875563.png"
+          alt="Rotating Image" class="rotating-image">
+      </div>
+    </div>
+    <h1 id="text"></h1>
+  </div>
+  <audio id="player" autoplay loop>
+    <source src="PleaseTellMeWhy-BaoThy-4045805.mp3" type="audio/mp3" />
+  </audio>
+
+  <script>
+
+    const texts = [
+      "My baby love you so much forever you and I",
+      "I love you oh! I love you so much forever you and I",
+      "My baby love you so much forever you and I",
+      "I love you oh! I love you so much forever you and I"]
+
+    let index = 0;
+    let wordIndex = 0;
+    let text = texts[index];
+    const textElement = document.getElementById('text');
+
+    // Hàm để bắt đầu chạy hiệu ứng
+    function startTyping() {
+      // Chờ 28 giây trước khi bắt đầu chạy hiệu ứng
+      setTimeout(type, 28600); // 28 giây (28000 milliseconds)
+      setTimeout(stopMusic, 52350);
+    }
+    function stopMusic() {
+      const audio = document.getElementById('player');
+      audio.pause(); // Tạm dừng phát nhạc
+    }
+    // Hàm để hiển thị từng từ một
+    function type() {
+      if (wordIndex < text.split(' ').length) {
+        const words = text.split(' ');
+        const currentText = words.slice(0, wordIndex + 1).join(' ');
+        textElement.textContent = currentText;
+        wordIndex++;
+        setTimeout(type, 440); // Tốc độ hiển thị từng từ (200 milliseconds)
+      } else {
+        wordIndex = 0;
+        index++;
+        if (index < texts.length) {
+          text = texts[index];
+          typingTimeout = setTimeout(type, 700); // Thời gian chờ giữa các đoạn văn bản (500 milliseconds)
+        } // Thời gian hiển thị sau khi hoàn thành (1000 milliseconds)
+      }
+    }
+
+    // Hàm để chuyển sang đoạn văn bản tiếp theo
+    function nextText() {
+      wordIndex = 0;
+      index++;
+      if (index >= texts.length) {
+        index = 0;
+      }
+      text = texts[index];
+      setTimeout(type, 500); // Thời gian chờ giữa các đoạn văn bản (1000 milliseconds)
+    }
+
+    // Gọi hàm startTyping() để bắt đầu chạy hiệu ứng sau khi đã chờ 28 giây
+    startTyping();
+  </script>
+
+
+</body>
+
+</html>
